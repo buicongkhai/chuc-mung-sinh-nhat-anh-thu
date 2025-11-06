@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật Anh Thư!</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS cho toàn bộ trang */
+        body {
+            /* Nền gradient hồng phấn nhẹ nhàng */
+            background: radial-gradient(circle, #fff0f5, #ffdbe9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Dancing Script', cursive; /* Font chữ mặc định */
+            overflow: hidden; /* Ẩn thanh cuộn */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Lời chúc chính */
+        .wish-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 4em; /* Cỡ chữ lớn */
+            color: #d81b60; /* Màu hồng đậm */
+            text-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+            margin: 0;
+            animation: bounceIn 1.5s ease;
+        }
+
+        /* Tên */
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            color: #c2185b;
+            margin: 10px 0 30px 0;
+            animation: fadeIn 2s ease 1s forwards;
+            opacity: 0; /* Ẩn ban đầu */
+        }
+
+        /* --- CSS cho Bánh Sinh Nhật --- */
+        .cake {
+            position: relative;
+            width: 250px;
+            height: 280px; /* Chiều cao tổng thể của bánh và nến */
+            margin: 30px auto 0;
+            animation: zoomIn 1s ease 0.5s forwards;
+            opacity: 0; /* Ẩn ban đầu */
+            transform: scale(0.5); /* Thu nhỏ ban đầu */
+        }
+
+        /* Đĩa bánh */
+        .plate {
+            width: 300px;
+            height: 40px;
+            background: #f0f8ff; /* Màu trắng xanh */
+            border-radius: 50%;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 8px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Các lớp bánh */
+        .layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f7b2c5; /* Màu hồng bánh */
+            border: 2px solid #f48fb1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .layer-bottom {
+            width: 240px;
+            height: 100px;
+            bottom: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .layer-top {
+            width: 200px;
+            height: 80px;
+            bottom: 130px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* Lớp kem */
+        .icing {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            z-index: 5;
+        }
+
+        /* Kem giữa 2 lớp */
+        .icing-middle {
+            width: 240px;
+            height: 20px;
+            bottom: 120px; /* Nằm giữa 2 lớp */
+            border-radius: 50% 50% 0 0 / 10px 10px 0 0;
+        }
+
+        /* Kem chảy trên cùng */
+        .icing-top {
+            width: 210px;
+            height: 30px;
+            bottom: 210px;
+            border-radius: 0 0 50% 50% / 0 0 20px 20px; /* Tạo hiệu ứng chảy */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Quả cherry trang trí */
+        .cherry {
+            width: 15px;
+            height: 15px;
+            background: #d32f2f;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 10;
+            top: -20px; /* Nằm trên lớp kem chảy */
+            border: 2px solid #fff;
+        }
+        .cherry1 { left: 45%; }
+        .cherry2 { left: 30%; }
+        .cherry3 { left: 60%; }
+
+        /* Nến */
+        .candles {
+            position: absolute;
+            bottom: 240px; /* Trên lớp kem trên cùng */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px; /* Khoảng cách giữa các nến */
+            z-index: 10;
+        }
+
+        .candle {
+            width: 10px;
+            height: 50px;
+            background: linear-gradient(#f9a825, #fdd835);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+        }
+
+        /* Ngọn lửa */
+        .flame {
+            width: 10px;
+            height: 18px;
+            background: #ffc107;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* Hình giọt nước */
+            position: absolute;
+            top: -17px;
+            left: 0;
+            animation: flicker 1.5s infinite ease-in-out;
+            transform-origin: bottom center;
+        }
+
+        /* Hiệu ứng lửa nhấp nháy */
+        @keyframes flicker {
+            0%, 100% {
+                transform: scaleY(1) scaleX(1);
+                opacity: 1;
+                box-shadow: 0 0 5px #ffc107, 0 -3px 8px #ffeb3b;
+            }
+            50% {
+                transform: scaleY(0.9) scaleX(1.05);
+                opacity: 0.8;
+                box-shadow: 0 0 8px #ffc107, 0 -2px 5px #ffeb3b;
+            }
+        }
+
+        /* --- CSS cho Bó Hoa (tái sử dụng) --- */
+        .flower-container {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            z-index: 1;
+            /* Hiệu ứng "thở" */
+            animation: bloom 4s infinite ease-in-out;
+        }
+
+        /* Đặt 2 bó hoa 2 bên */
+        .flower-left {
+            left: 20px;
+            bottom: 20px;
+            transform: scale(0.7) rotate(-10deg);
+        }
+
+        .flower-right {
+            right: 20px;
+            bottom: 20px;
+            transform: scale(0.7) rotate(10deg);
+        }
+
+        @media (max-width: 900px) {
+            /* Trên điện thoại, thu nhỏ hoa và đẩy xuống */
+            .flower-container {
+                transform: scale(0.4);
+                bottom: -50px;
+            }
+            .flower-left { left: -50px; }
+            .flower-right { right: -50px; }
+            .wish-title { font-size: 2.5em; }
+            .name { font-size: 2em; }
+        }
+
+        /* Hiệu ứng "nở hoa" */
+        @keyframes bloom {
+            0% { transform: scale(0.7); }
+            50% { transform: scale(0.72); }
+            100% { transform: scale(0.7); }
+        }
+        
+        /* Hiệu ứng xuất hiện */
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            80% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Copy CSS Bông hoa từ lần trước --- */
+        /* (Áp dụng class .flower-container) */
+
+        .flower-container .stem {
+            width: 12px;
+            height: 280px;
+            background: linear-gradient(to right, #43a047, #66bb6a);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 6px;
+            z-index: 1;
+        }
+
+        .flower-container .leaf {
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(to right, #66bb6a, #81c784);
+            border-radius: 50% 0 50% 0;
+            position: absolute;
+            z-index: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .flower-container .leaf.leaf1 {
+            bottom: 100px;
+            left: calc(50% - 80px);
+            transform: rotate(-25deg);
+        }
+
+        .flower-container .leaf.leaf2 {
+            bottom: 150px;
+            left: 50%;
+            transform: rotate(25deg) scaleX(-1);
+        }
+
+        .flower-container .center {
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(#fffb7d, #ffeb3b);
+            border-radius: 50%;
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            box-shadow: 0 0 15px #ffeb3b;
+        }
+
+        .flower-container .petal-wrapper {
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            width: 1px;
+            height: 1px;
+            z-index: 5;
+        }
+
+        .flower-container .petal {
+            width: 60px;
+            height: 85px;
+            background: linear-gradient(to bottom, #f8bbd0, #e91e63);
+            border: 1px solid #ad1457;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            bottom: 0;
+            left: -30px;
+            transform-origin: bottom center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Xoay các cánh hoa */
+        .flower-container .petal:nth-child(1) { transform: rotate(0deg); }
+        .flower-container .petal:nth-child(2) { transform: rotate(50deg); }
+        .flower-container .petal:nth-child(3) { transform: rotate(100deg); }
+        .flower-container .petal:nth-child(4) { transform: rotate(150deg); }
+        .flower-container .petal:nth-child(5) { transform: rotate(200deg); }
+        .flower-container .petal:nth-child(6) { transform: rotate(250deg); }
+        .flower-container .petal:nth-child(7) { transform: rotate(300deg); }
+        .flower-container .petal:nth-child(8) { transform: rotate(350deg); }
+
+    </style>
+</head>
+<body>
+
+    <div class="flower-container flower-left">
+        <div class="stem"></div>
+        <div class="leaf leaf1"></div>
+        <div class="leaf leaf2"></div>
+        <div class="petal-wrapper">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+        </div>
+        <div class="center"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="wish-title">Chúc Mừng Sinh Nhật</h1>
+        
+        <div class="cake">
+            <div class="plate"></div>
+            
+            <div class="layer layer-bottom"></div>
+            <div class="icing icing-middle"></div>
+            <div class="layer layer-top"></div>
+            
+            <div class="icing icing-top">
+                <div class="cherry cherry1"></div>
+                <div class="cherry cherry2"></div>
+                <div class="cherry cherry3"></div>
+            </div>
+            
+            <div class="candles">
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="name">Bùi Thị Anh Thư</h2>
+    </div>
+
+    <div class="flower-container flower-right">
+        <div class="stem"></div>
+        <div class="leaf leaf1"></div>
+        <div class="leaf leaf2"></div>
+        <div class="petal-wrapper">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+        </div>
+        <div class="center"></div>
+    </div>
+
+</body>
+</html>
